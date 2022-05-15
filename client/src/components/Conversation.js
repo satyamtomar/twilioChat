@@ -36,6 +36,7 @@ class Conversation extends Component {
   };
 
   componentDidMount = () => {
+     
       if (this.state.conversationProxy) {
         this.loadMessagesFor(this.state.conversationProxy);
 
@@ -92,9 +93,11 @@ class Conversation extends Component {
 
   render = () => {
     return (
+       
         <Dropzone
             onDrop={this.onDrop}
             accept="image/*">
+                
           {({getRootProps, getInputProps, isDragActive}) => (
               <div
                   {...getRootProps()}

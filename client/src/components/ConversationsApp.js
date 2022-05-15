@@ -102,7 +102,7 @@ class ConversationsApp extends React.Component {
     this.setState({ statusString: "Connecting to Twilio…" });
     console.log("this is client---",this.conversationsClient)
 
-    this.conversationsClient.on("co00nnectionStateChanged", (state) => {
+    this.conversationsClient.on("connectionStateChanged", (state) => {
       console.log('check the connect state - ', state)
       if (state === "connecting")
         this.setState({
