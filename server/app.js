@@ -8,13 +8,14 @@ const cors=require('cors');
 const app = express();
 
 const port = 5001;
-const {CHAT_ROUTES} =require('./routes');
+const {CHAT_ROUTES,CONVO_ROUTES} =require('./routes');
 // use the Express JSON middleware
 app.use(express.json());
 app.use(cors());
 
 
 app.use('/',CHAT_ROUTES);
+app.use('/',CONVO_ROUTES);
 // Start the Express server
 app.listen(port, () => {
   console.log(`Express server running on port ${port}`);
