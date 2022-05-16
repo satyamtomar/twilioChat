@@ -137,13 +137,13 @@ class ConversationsApp extends React.Component {
     console.log("this is conversssssaaa---",this.conversationsClient)
     this.conversationsClient.on("conversationJoined", (conversation) => {
       console.log("this is  ",conversation)
-      // this.setState({ conversations: [...this.state.conversations, conversation] });
+      this.setState({ conversations: [...this.state.conversations, conversation] });
     });
     this.conversationsClient.on("conversationLeft", (thisConversation) => {
       console.log("this is converation cinet",thisConversation)
-      // this.setState({
-      //   conversations: [...this.state.conversations.filter((it) => it !== thisConversation)]
-      // });
+      this.setState({
+        conversations: [...this.state.conversations.filter((it) => it !== thisConversation)]
+      });
     });
     console.log("this is conversssssaaa111---",this.conversationsClient)
 
