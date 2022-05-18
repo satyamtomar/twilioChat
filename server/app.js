@@ -18,5 +18,6 @@ app.use('/',CHAT_ROUTES);
 app.use('/',CONVO_ROUTES);
 // Start the Express server
 app.listen(port, () => {
+  console.log(process.env,'env');
   console.log(`Express server running on port ${port}`);
 });

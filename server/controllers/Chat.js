@@ -1,5 +1,6 @@
 
 const AccessToken = require('twilio').jwt.AccessToken;
+// require("dotenv").config();
 const ChatGrant = AccessToken.ChatGrant;
 const Joi = require("@hapi/joi");
 // const APP_CONSTANTS = require("../appConstants");
@@ -7,18 +8,18 @@ const Boom = require("boom");
 import universalFunctions from "../utils/universalFunctions";
 
 // Used when generating any kind of tokens
-const twilioAccountSid = 'AC6945a6006a6be85f4e89ec2b53b5c58c';
-const authToken = '6df8c38b9726b95239b48769f8962770';
+const twilioAccountSid = process.env.twilioAccountSid;
+const authToken = process.env.authToken;
 const client = require('twilio')(twilioAccountSid, authToken);
 
 
-const twilioApiKey = 'SK5ec9583c2a50abec25f55a021b827149';
-const twilioApiSecret = 'n6q8ylEfNyMhdPISTh0zHwop8ltBBovI';
+const twilioApiKey = process.env.twilioApiKey;
+const twilioApiSecret = process.env.twilioApiSecret;
 
 // Used specifically for creating Chat tokens
-const serviceSid = 'IS81c99294a2344cec893f137c21d1bffb';
+const serviceSid = process.env.serviceSid;
 // const identity = 'user@example.com';
-const conversationSid = 'CH70856255e6124f01ba2b76555ecfc38c';
+const conversationSid = process.env.conversationSid;
 // Create a "grant" which enables a client to use Chat as a given user,
 // on a given device
 
@@ -60,12 +61,15 @@ module.exports = {
         throw Boom.badRequest("token not found")
       }
       let sid;
-      client.conversations.conversations(conversationSid)
+      await client.conversations.conversations(conversationSid)
         .participants
         .create({ identity: req.body.identity })
         .then(participant => { console.log(participant.sid); sid = participant.sid; })
-        .catch(error => { console.log(error,'kya hai isme error') });
-
+        .catch(error => { console.log(error,'kya hai isme error'); });
+    // if(!sid)
+    // {
+    //   // throw Boom.badRequest('no participant added')
+    // }
       universalFunctions.sendSuccess(
         {
           statusCode: 200,
